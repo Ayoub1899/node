@@ -24,17 +24,5 @@ pipeline {
                 }
             }
         }
-        stage('Pousser l\'image dans un registre (optionnel)') {
-            when {
-                expression { return env.DOCKER_REGISTRY }
-            }
-            steps {
-                script {
-                    docker.withRegistry("https://${DOCKER_REGISTRY}", 'credentials-id') {
-                        docker.image("${DOCKER_IMAGE}").push()
-                    }
-                }
-            }
-        }
     }
 }
